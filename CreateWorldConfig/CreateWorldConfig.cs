@@ -1,5 +1,6 @@
 using NeosModLoader;
 using FrooxEngine;
+using BaseX;
 
 namespace CreateWorldConfig
 {
@@ -7,7 +8,7 @@ namespace CreateWorldConfig
     {
         public override string Name => "CreateWorldConfig";
         public override string Author => "art0007i";
-        public override string Version => "1.0.0";
+        public override string Version => "1.0.1";
         public override string Link => "https://github.com/art0007i/CreateWorldConfig/";
         public override void OnEngineInit()
         {
@@ -19,11 +20,11 @@ namespace CreateWorldConfig
             {
                 DevCreateNewForm.AddAction("Editor", "World Configuration", delegate (Slot s)
                 {
-                    InspectorHelper.OpenInspectorForTarget((IWorldElement)getConfig.GetValue(s.World), null, true);
+                    WorkerInspector.Create(s, (Worker)getConfig.GetValue(s.World));
                 }); 
                 DevCreateNewForm.AddAction("Editor", "World Permission Controller", delegate (Slot s)
                 {
-                    InspectorHelper.OpenInspectorForTarget(s.World.Permissions, null, true);
+                    WorkerInspector.Create(s, s.World.Permissions);
                 });
             });
         }
